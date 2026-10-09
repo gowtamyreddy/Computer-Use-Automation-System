@@ -1,0 +1,35 @@
+{
+  "run_id": "replay-20261009-134108-fd0e",
+  "capability": "corelink.member.read_savings_balance",
+  "version": "1.0.0",
+  "tenant": "demo",
+  "status": "business_outcome",
+  "outputs": {},
+  "outcome": {
+    "code": "VALIDATION_REJECTED",
+    "message": "Host-side field validation rejected the input",
+    "rule_id": "invalid_input",
+    "step_id": "s3"
+  },
+  "error": null,
+  "recoveries": [],
+  "warnings": [],
+  "interventions": [],
+  "steps": [
+    {
+      "step_id": "s1",
+      "action": "click",
+      "status": "ok",
+      "strategy": "role_name",
+      "duration_ms": 50
+    },
+    {
+      "step_id": "s2",
+      "action": "fill",
+      "status": "ok",
+      "strategy": "label",
+      "duration_ms": 11
+    }
+  ],
+  "duration_ms": 453
+}

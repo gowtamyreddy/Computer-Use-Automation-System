@@ -1,0 +1,46 @@
+{
+  "run_id": "replay-20261009-134105-9a7c",
+  "capability": "corelink.member.read_savings_balance",
+  "version": "1.0.0",
+  "tenant": "demo",
+  "status": "succeeded",
+  "outputs": {
+    "share_savings_balance": "sha256:f0c37bf80ea5"
+  },
+  "outcome": null,
+  "error": null,
+  "recoveries": [],
+  "warnings": [],
+  "interventions": [],
+  "steps": [
+    {
+      "step_id": "s1",
+      "action": "click",
+      "status": "ok",
+      "strategy": "role_name",
+      "duration_ms": 57
+    },
+    {
+      "step_id": "s2",
+      "action": "fill",
+      "status": "ok",
+      "strategy": "label",
+      "duration_ms": 14
+    },
+    {
+      "step_id": "s3",
+      "action": "click",
+      "status": "ok",
+      "strategy": "role_name",
+      "duration_ms": 189
+    },
+    {
+      "step_id": "s4",
+      "action": "extract",
+      "status": "ok",
+      "strategy": "table_cell",
+      "duration_ms": 12
+    }
+  ],
+  "duration_ms": 449
+}

@@ -1,0 +1,52 @@
+# Hand-written fixture used by the replay tests (independent of any discovery run).
+schema_version: '1.0'
+id: corelink.member.read_savings_balance
+version: 1.0.0
+title: Read member savings balance
+description: Look up a member by member number and return the Share Savings balance.
+status: draft
+app: {product: corelink-teller, versions: '>=4.2 <5', surface: legacy_web, profile: corelink-teller}
+provenance: {recorded_at: '2026-10-09T00:00:00Z', discovery_run_id: fixture, model: none, goal: fixture}
+inputs:
+  - {name: member_id, type: string, description: 5-digit member number, sensitivity: pii}
+outputs:
+  - {name: savings_balance, type: money, description: Share Savings balance, sensitivity: confidential}
+steps:
+  - id: s1
+    action: click
+    intent: Open Member Inquiry from the menu
+    target:
+      description: Member Inquiry menu link
+      frame: {path: [nav]}
+      strategies: [{kind: role_name, role: link, name: Member Inquiry}, {kind: css, selector: 'a[href^="/mbrinq"]'}]
+      fingerprint: {tag: a, role: link}
+    expect: [{kind: url_matches, frame: {path: [work]}, path: /mbrinq}]
+  - id: s2
+    action: fill
+    intent: Enter the member number
+    target:
+      description: Member number field
+      frame: {path: [work]}
+      strategies: [{kind: label, label: 'Member #', role: textbox}, {kind: css, selector: 'input[name="F0231"]'}]
+      fingerprint: {tag: input, input_type: text, role: textbox}
+    value: {kind: param, param: member_id}
+  - id: s3
+    action: click
+    intent: Submit the inquiry
+    target:
+      description: Go button
+      frame: {path: [work]}
+      strategies: [{kind: role_name, role: button, name: Go}, {kind: css, selector: 'input[name="B01"]'}]
+      fingerprint: {tag: input, input_type: submit, role: button}
+    expect: [{kind: url_matches, frame: {path: [work]}, path: /mbrdtl, query: {mbr: '{member_id}'}}]
+  - id: s4
+    action: extract
+    intent: Read the Share Savings balance
+    output: savings_balance
+    target:
+      description: Balance cell of the Share Savings row
+      frame: {path: [work]}
+      strategies: [{kind: table_cell, column: Balance, row_key: Share Savings}]
+      fingerprint: {tag: td}
+success:
+  - {kind: url_matches, frame: {path: [work]}, path: /mbrdtl, query: {mbr: '{member_id}'}}

@@ -1,0 +1,17 @@
+# Per-tenant deployment facts. Two tenants run the same vendor product (corelink-teller);
+# capabilities and the app profile are shared, only the overlay differs.
+demo:
+  base_url: http://127.0.0.1:8765
+  profile: corelink-teller
+  secret_namespace: demo
+lakeside:
+  base_url: http://127.0.0.1:8766
+  profile: corelink-teller
+  secret_namespace: lakeside
+  overlay: overlays/lakeside.yaml
+# Demo only: the Lakeside deployment *without* its overlay, to show graceful degradation
+# (css fallbacks keep it working, every fallback is reported as a drift warning).
+lakeside-unmapped:
+  base_url: http://127.0.0.1:8766
+  profile: corelink-teller
+  secret_namespace: lakeside

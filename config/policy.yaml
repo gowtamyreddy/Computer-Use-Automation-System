@@ -1,0 +1,26 @@
+# Allowlist + risk policy. Origins come from the tenant's base_url (config/tenants.yaml);
+# everything else is denied by default -- both for agent actions and at the network layer.
+allowed_paths:
+  - /login
+  - /main
+  - /hdr
+  - /nav
+  - /welcome
+  - /notice
+  - /mbrinq
+  - /mbrdtl
+  - /subacct
+  - /subacct/review
+  - /subacct/commit   # reachable, but the Confirm control is classified irreversible (approval required)
+denied_paths:
+  - /admin/*          # system administration is never in scope for automation
+  - /__faults         # out-of-band fault injection used by the test harness only
+  - /signoff          # ending the session would strand the run
+allowed_actions: [click, fill, select, press, extract]
+irreversible: require_approval      # block | require_approval
+irreversible_name_patterns:
+  - '^(confirm|commit|post|submit payment|transfer|wire|disburse|approve|authori[sz]e|delete|remove|close account|void|reverse)\b'
+max_discovery_steps: 25
+discovery_timeout_s: 300
+stuck_after_no_change: 3
+human_timeout_s: 900

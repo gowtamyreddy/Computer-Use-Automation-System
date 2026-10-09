@@ -1,0 +1,12 @@
+{"seq": 1, "ts": "2026-10-09T17:41:07.567+00:00", "t_ms": 260, "type": "replay_start", "capability": "corelink.member.read_savings_balance", "version": "1.0.0", "status": "draft", "tenant": "demo", "inputs": ["member_id"]}
+{"seq": 2, "ts": "2026-10-09T17:41:07.567+00:00", "t_ms": 260, "type": "login_start", "profile": "corelink-teller", "tenant": "demo"}
+{"seq": 3, "ts": "2026-10-09T17:41:07.608+00:00", "t_ms": 301, "type": "step_ok", "step_id": "s1", "action": "fill", "strategy": "label", "intent": "Enter user id"}
+{"seq": 4, "ts": "2026-10-09T17:41:07.645+00:00", "t_ms": 338, "type": "step_ok", "step_id": "s2", "action": "fill", "strategy": "label", "intent": "Enter password"}
+{"seq": 5, "ts": "2026-10-09T17:41:07.700+00:00", "t_ms": 393, "type": "step_ok", "step_id": "s3", "action": "click", "strategy": "role_name", "intent": "Sign on"}
+{"seq": 6, "ts": "2026-10-09T17:41:07.720+00:00", "t_ms": 412, "type": "login_ok", "home": "http://127.0.0.1:8765/main?sid=[REDACTED]"}
+{"seq": 7, "ts": "2026-10-09T17:41:07.767+00:00", "t_ms": 460, "type": "step_ok", "step_id": "s1", "action": "click", "strategy": "role_name", "intent": "Start a member lookup by selecting 'Member Inquiry' from the navigation menu."}
+{"seq": 8, "ts": "2026-10-09T17:41:07.783+00:00", "t_ms": 476, "type": "step_ok", "step_id": "s2", "action": "fill", "strategy": "label", "intent": "Enter the member number to look up the member for inquiry."}
+{"seq": 9, "ts": "2026-10-09T17:41:07.821+00:00", "t_ms": 514, "type": "step_ok", "step_id": "s3", "action": "click", "strategy": "role_name", "intent": "Proceed to look up the member after entering the Member # as a trained operator would by clicking 'Go'."}
+{"seq": 10, "ts": "2026-10-09T17:41:07.980+00:00", "t_ms": 672, "type": "state_detected", "rule": "access_denied", "code": "ACCESS_DENIED", "classification": "business_outcome", "step_id": "s3"}
+{"seq": 11, "ts": "2026-10-09T17:41:08.022+00:00", "t_ms": 715, "type": "business_outcome", "code": "ACCESS_DENIED", "step_id": "s3", "evidence": ["screens/010-access_denied.png", "dom/010-access_denied.html"]}
+{"seq": 12, "ts": "2026-10-09T17:41:08.022+00:00", "t_ms": 715, "type": "replay_finished", "status": "business_outcome", "code": "ACCESS_DENIED"}

@@ -1,0 +1,13 @@
+{"seq": 1, "ts": "2026-10-09T17:41:17.946+00:00", "t_ms": 295, "type": "replay_start", "capability": "corelink.member.read_savings_balance", "version": "1.0.0", "status": "draft", "tenant": "demo", "inputs": ["member_id"]}
+{"seq": 2, "ts": "2026-10-09T17:41:17.946+00:00", "t_ms": 296, "type": "login_start", "profile": "corelink-teller", "tenant": "demo"}
+{"seq": 3, "ts": "2026-10-09T17:41:17.992+00:00", "t_ms": 341, "type": "step_ok", "step_id": "s1", "action": "fill", "strategy": "label", "intent": "Enter user id"}
+{"seq": 4, "ts": "2026-10-09T17:41:18.034+00:00", "t_ms": 384, "type": "step_ok", "step_id": "s2", "action": "fill", "strategy": "label", "intent": "Enter password"}
+{"seq": 5, "ts": "2026-10-09T17:41:18.080+00:00", "t_ms": 430, "type": "step_ok", "step_id": "s3", "action": "click", "strategy": "role_name", "intent": "Sign on"}
+{"seq": 6, "ts": "2026-10-09T17:41:20.118+00:00", "t_ms": 2467, "type": "login_ok", "home": "http://127.0.0.1:8765/main?sid=[REDACTED]"}
+{"seq": 7, "ts": "2026-10-09T17:41:20.169+00:00", "t_ms": 2519, "type": "step_ok", "step_id": "s1", "action": "click", "strategy": "role_name", "intent": "Start a member lookup by selecting 'Member Inquiry' from the navigation menu."}
+{"seq": 8, "ts": "2026-10-09T17:41:22.279+00:00", "t_ms": 4629, "type": "step_ok", "step_id": "s2", "action": "fill", "strategy": "label", "intent": "Enter the member number to look up the member for inquiry."}
+{"seq": 9, "ts": "2026-10-09T17:41:22.323+00:00", "t_ms": 4672, "type": "step_ok", "step_id": "s3", "action": "click", "strategy": "role_name", "intent": "Proceed to look up the member after entering the Member # as a trained operator would by clicking 'Go'."}
+{"seq": 10, "ts": "2026-10-09T17:41:26.459+00:00", "t_ms": 8808, "type": "extracted", "step_id": "s4", "output": "share_savings_balance", "value_fingerprint": "sha256:8f5418c8af2e"}
+{"seq": 11, "ts": "2026-10-09T17:41:26.459+00:00", "t_ms": 8809, "type": "step_ok", "step_id": "s4", "action": "extract", "strategy": "table_cell", "intent": "This cell is in the 'Balance' column and the 'Share Savings' row, matching the account type requested."}
+{"seq": 12, "ts": "2026-10-09T17:41:26.467+00:00", "t_ms": 8817, "type": "checkpoint_ok", "conditions": ["frame work at /mbrdtl mbr={member_id}", "element present: cell 'MEMBER DETAIL'", "element present: cell 'SHARES / ACCOUNTS'", "element present: columnheader 'Balance'", "element present: 'Balance' cell in row 'Share Savings'"]}
+{"seq": 13, "ts": "2026-10-09T17:41:26.503+00:00", "t_ms": 8852, "type": "replay_finished", "status": "succeeded", "code": null}

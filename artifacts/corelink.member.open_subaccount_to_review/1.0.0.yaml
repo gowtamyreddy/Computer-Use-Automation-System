@@ -1,0 +1,294 @@
+schema_version: '1.0'
+id: corelink.member.open_subaccount_to_review
+version: 1.0.0
+title: open_share_subaccount_to_review
+description: For a given member, open a new share sub-account with specified type, nickname, and initial deposit, and stop
+  at the confirmation screen.
+status: draft
+app:
+  product: corelink-teller
+  versions: '>=4.2 <5'
+  surface: legacy_web
+  profile: corelink-teller
+provenance:
+  recorded_at: '2026-10-09T17:41:02+00:00'
+  discovery_run_id: discovery-20261009-134047-f266
+  model: gpt-4.1
+  goal: For member {member_id}, open a new {share_type} sub-account with nickname {nickname} and initial deposit {deposit},
+    and reach the confirmation screen. Do not confirm it.
+  recorded_on_tenant: demo
+  human_interventions: 0
+inputs:
+- name: member_id
+  type: string
+  description: 5-digit member number
+  required: true
+  sensitivity: pii
+- name: share_type
+  type: string
+  description: share product to open
+  required: true
+  sensitivity: pii
+- name: nickname
+  type: string
+  description: nickname for the new share
+  required: true
+  sensitivity: pii
+- name: deposit
+  type: string
+  description: initial deposit amount
+  required: true
+  sensitivity: pii
+outputs: []
+outcomes: []
+steps:
+- id: s1
+  action: click
+  intent: Start by accessing Member Inquiry to look up the member and open a new share sub-account.
+  risk: safe
+  target:
+    description: link 'Member Inquiry'
+    frame:
+      path:
+      - nav
+    strategies:
+    - kind: role_name
+      role: link
+      name: Member Inquiry
+    - kind: css
+      selector: a[href^="/mbrinq"]
+    fingerprint:
+      tag: a
+      role: link
+  expect:
+  - kind: url_matches
+    frame:
+      path:
+      - work
+    path: /mbrinq
+    query: {}
+  timeout_ms: 10000
+- id: s2
+  action: fill
+  intent: Enter the member number to look up the member for whom the new share sub-account will be opened.
+  risk: safe
+  target:
+    description: 'textbox labelled ''Member #'''
+    frame:
+      path:
+      - work
+    strategies:
+    - kind: label
+      label: 'Member #'
+      role: textbox
+    - kind: css
+      selector: input[name="F0231"]
+    fingerprint:
+      tag: input
+      input_type: text
+      role: textbox
+  value:
+    kind: param
+    param: member_id
+  expect: []
+  timeout_ms: 10000
+- id: s3
+  action: click
+  intent: 'Proceed to member''s account details after entering Member # and Suffix.'
+  risk: safe
+  target:
+    description: button 'Go'
+    frame:
+      path:
+      - work
+    strategies:
+    - kind: role_name
+      role: button
+      name: Go
+    - kind: css
+      selector: input[name="B01"]
+    fingerprint:
+      tag: input
+      input_type: submit
+      role: button
+  expect:
+  - kind: url_matches
+    frame:
+      path:
+      - work
+    path: /mbrdtl
+    query:
+      mbr: '{member_id}'
+  timeout_ms: 10000
+- id: s4
+  action: click
+  intent: To begin the process of opening a new sub-account for the member.
+  risk: safe
+  target:
+    description: button 'Open Sub-Account'
+    frame:
+      path:
+      - work
+    strategies:
+    - kind: role_name
+      role: button
+      name: Open Sub-Account
+    - kind: css
+      selector: input[name="B20"]
+    fingerprint:
+      tag: input
+      input_type: submit
+      role: button
+  expect:
+  - kind: url_matches
+    frame:
+      path:
+      - work
+    path: /subacct
+    query:
+      mbr: '{member_id}'
+  timeout_ms: 10000
+- id: s5
+  action: select
+  intent: Select the share product to open as specified by the task parameter.
+  risk: safe
+  target:
+    description: combobox labelled 'Share Type'
+    frame:
+      path:
+      - work
+    strategies:
+    - kind: label
+      label: Share Type
+      role: combobox
+    - kind: css
+      selector: select[name="F0410"]
+    fingerprint:
+      tag: select
+      role: combobox
+  value:
+    kind: param
+    param: share_type
+  expect: []
+  timeout_ms: 10000
+- id: s6
+  action: fill
+  intent: Enter the nickname for the new share sub-account as required by the task.
+  risk: safe
+  target:
+    description: textbox labelled 'Nickname'
+    frame:
+      path:
+      - work
+    strategies:
+    - kind: label
+      label: Nickname
+      role: textbox
+    - kind: css
+      selector: input[name="F0411"]
+    fingerprint:
+      tag: input
+      input_type: text
+      role: textbox
+  value:
+    kind: param
+    param: nickname
+  expect: []
+  timeout_ms: 10000
+- id: s7
+  action: fill
+  intent: Enter the initial deposit amount for the new sub-account as required by the workflow.
+  risk: safe
+  target:
+    description: textbox labelled 'Initial Deposit'
+    frame:
+      path:
+      - work
+    strategies:
+    - kind: label
+      label: Initial Deposit
+      role: textbox
+    - kind: css
+      selector: input[name="F0412"]
+    fingerprint:
+      tag: input
+      input_type: text
+      role: textbox
+  value:
+    kind: param
+    param: deposit
+  expect: []
+  timeout_ms: 10000
+- id: s8
+  action: click
+  intent: Proceed to the review/confirmation screen after entering all required information for opening the sub-account.
+  risk: safe
+  target:
+    description: button 'Review'
+    frame:
+      path:
+      - work
+    strategies:
+    - kind: role_name
+      role: button
+      name: Review
+    - kind: css
+      selector: input[name="B21"]
+    fingerprint:
+      tag: input
+      input_type: submit
+      role: button
+  expect:
+  - kind: url_matches
+    frame:
+      path:
+      - work
+    path: /subacct/review
+    query: {}
+  timeout_ms: 10000
+success:
+- kind: url_matches
+  frame:
+    path:
+    - work
+  path: /subacct/review
+  query: {}
+- kind: element_present
+  target:
+    description: cell 'CONFIRM NEW SUB-ACCOUNT'
+    frame:
+      path:
+      - work
+    strategies:
+    - kind: text
+      text: CONFIRM NEW SUB-ACCOUNT
+    fingerprint:
+      tag: td
+      role: cell
+- kind: element_present
+  target:
+    description: 'cell labelled ''Member #'''
+    frame:
+      path:
+      - work
+    strategies:
+    - kind: label
+      label: 'Member #'
+    fingerprint:
+      tag: td
+      role: cell
+- kind: element_present
+  target:
+    description: cell labelled 'Share Type'
+    frame:
+      path:
+      - work
+    strategies:
+    - kind: label
+      label: Share Type
+    fingerprint:
+      tag: td
+      role: cell
+review_notes:
+- 'link ''Member Inquiry'': dropped label locator (attempts=[{''kind'': ''label'', ''matches'': 4, ''fingerprint_ok'': 4,
+  ''accepted'': False}])'

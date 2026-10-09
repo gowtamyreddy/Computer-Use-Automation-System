@@ -1,0 +1,105 @@
+# App profile for the CoreLink Teller vendor product. Shared by every tenant running it.
+# Encodes vendor-level knowledge once: how to sign on, how to recognise its error/notice
+# screens, and which controls commit changes. Capabilities reference it by id.
+id: corelink-teller
+product: corelink-teller
+versions: ">=4.2 <5"
+surface: legacy_web
+
+login:
+  path: /login
+  steps:
+    - id: s1
+      action: fill
+      intent: Enter user id
+      target:
+        description: User ID field
+        strategies: [{kind: label, label: User ID, role: textbox}, {kind: css, selector: "input[name=usr]"}]
+        fingerprint: {tag: input, input_type: text}
+      value: {kind: secret, ref: corelink/username}
+    - id: s2
+      action: fill
+      intent: Enter password
+      target:
+        description: Password field
+        strategies: [{kind: label, label: Password, role: textbox}, {kind: css, selector: "input[name=pwd]"}]
+        fingerprint: {tag: input, input_type: password}
+      value: {kind: secret, ref: corelink/password}
+    - id: s3
+      action: click
+      intent: Sign on
+      target:
+        description: Sign On button
+        strategies: [{kind: role_name, role: button, name: Sign On}, {kind: css, selector: "input[name=B00]"}]
+        fingerprint: {tag: input, input_type: submit}
+      expect:
+        - {kind: url_matches, path: /main}
+  success:
+    - {kind: url_matches, path: /main}
+
+state_rules:
+  # ---- recoverable: known interstitials and transients -------------------------------------
+  - id: system_notice
+    description: Vendor maintenance notice shown in place of the requested screen
+    when: {kind: text_present, pattern: "SYSTEM NOTICE", frame: {path: [work]}}
+    classification: recoverable
+    code: INTERSTITIAL_NOTICE
+    handler:
+      kind: dismiss
+      target:
+        description: Acknowledge button on the system notice
+        frame: {path: [work]}
+        strategies: [{kind: role_name, role: button, name: Acknowledge}, {kind: css, selector: "input[name=B99]"}]
+        fingerprint: {tag: input, input_type: submit}
+  - id: system_busy
+    description: Transient host busy page; safe to retry read-only flows
+    when: {kind: text_present, pattern: "E503 SYSTEM BUSY"}
+    classification: recoverable
+    code: TRANSIENT_BUSY
+    handler: {kind: retry_flow, delay_ms: 1000, max_attempts: 2}
+  - id: session_expired
+    description: Session timed out; sign on again and restart (only before any irreversible step)
+    when: {kind: text_present, pattern: "E401 SESSION EXPIRED"}
+    classification: recoverable
+    code: SESSION_EXPIRED
+    handler: {kind: reauthenticate, max_attempts: 1}
+  - id: hold_dialog
+    description: Informational confirm() shown for members with an active hold; acknowledging only allows viewing
+    when: {kind: dialog, pattern: "active HOLD"}
+    classification: recoverable
+    code: MEMBER_HOLD_NOTICE
+    handler: {kind: accept_dialog, accept: true}
+  # ---- business outcomes common to the product ---------------------------------------------
+  - id: record_not_found
+    description: Host reports no record for the supplied key
+    when: {kind: text_present, pattern: "E2\\d\\d NO RECORD FOUND"}
+    classification: business_outcome
+    code: RECORD_NOT_FOUND
+  - id: invalid_input
+    description: Host-side field validation rejected the input
+    when: {kind: text_present, pattern: "E1\\d\\d INVALID|E3\\d\\d .*INVALID"}
+    classification: business_outcome
+    code: VALIDATION_REJECTED
+  - id: access_denied
+    description: Operator lacks privilege for this record (needs supervisor override)
+    when: {kind: text_present, pattern: "E403 ACCESS DENIED"}
+    classification: business_outcome
+    code: ACCESS_DENIED
+  # ---- hard failures -----------------------------------------------------------------------
+  - id: host_exception
+    description: Unhandled host exception page
+    when: {kind: text_present, pattern: "CL-500|UNHANDLED EXCEPTION"}
+    classification: failure
+    code: APP_ERROR
+    priority: 90
+  - id: function_unavailable
+    description: Host says the function does not exist for this operator/tenant
+    when: {kind: text_present, pattern: "FUNCTION NOT AVAILABLE"}
+    classification: failure
+    code: APP_FUNCTION_UNAVAILABLE
+
+risk_rules:
+  - name_pattern: "^confirm$"
+    reason: CoreLink 'Confirm' commits the pending transaction
+  - form_action_glob: "*/commit"
+    reason: form posts to a commit endpoint

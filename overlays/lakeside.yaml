@@ -1,0 +1,11 @@
+# Lakeside Community CU runs CoreLink 4.3 with relabelled screens. Same flow, same fields.
+# Label aliases are applied to role/label/text locators and to text patterns at load time,
+# so every shared capability works here without being re-recorded.
+tenant: lakeside
+profile: corelink-teller
+label_aliases:
+  "Member Inquiry": "Member Lookup"
+  "MEMBER INQUIRY": "MEMBER LOOKUP"
+  "Member #": "Member No."
+  "Go": "Search"
+step_targets: {}

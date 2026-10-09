@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "Located and extracted the current Share Savings balance for the member as requested.",
+  "steps_taken": 5,
+  "stop_code": null,
+  "capability": "corelink.member.read_savings_balance@1.0.0",
+  "usage": {
+    "prompt_tokens": 6928,
+    "completion_tokens": 254,
+    "calls": 5
+  }
+}

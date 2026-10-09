@@ -1,0 +1,2 @@
+{"seq": 1, "ts": "2026-10-09T17:41:28.042+00:00", "t_ms": 282, "type": "replay_start", "capability": "corelink.member.read_savings_balance", "version": "1.0.0", "status": "draft", "tenant": "demo", "inputs": []}
+{"seq": 2, "ts": "2026-10-09T17:41:28.043+00:00", "t_ms": 283, "type": "replay_finished", "status": "rejected", "code": "INVALID_INPUT"}

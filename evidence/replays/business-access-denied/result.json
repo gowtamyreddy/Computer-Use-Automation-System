@@ -1,0 +1,35 @@
+{
+  "run_id": "replay-20261009-134107-f7a6",
+  "capability": "corelink.member.read_savings_balance",
+  "version": "1.0.0",
+  "tenant": "demo",
+  "status": "business_outcome",
+  "outputs": {},
+  "outcome": {
+    "code": "ACCESS_DENIED",
+    "message": "Operator lacks privilege for this record (needs supervisor override)",
+    "rule_id": "access_denied",
+    "step_id": "s3"
+  },
+  "error": null,
+  "recoveries": [],
+  "warnings": [],
+  "interventions": [],
+  "steps": [
+    {
+      "step_id": "s1",
+      "action": "click",
+      "status": "ok",
+      "strategy": "role_name",
+      "duration_ms": 51
+    },
+    {
+      "step_id": "s2",
+      "action": "fill",
+      "status": "ok",
+      "strategy": "label",
+      "duration_ms": 11
+    }
+  ],
+  "duration_ms": 455
+}

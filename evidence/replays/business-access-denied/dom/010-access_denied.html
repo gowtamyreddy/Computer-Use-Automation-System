@@ -1,0 +1,29 @@
+<!-- frame path=[] url=http://127.0.0.1:8765/main?sid=[REDACTED] -->
+<html><head><title>CoreLink Teller</title></head><frameset rows="38,*" border="1"><frame name="hdr" src="/hdr?sid=[REDACTED]" scrolling="no"><frameset cols="170,*"><frame name="nav" src="/nav?sid=[REDACTED]"><frame name="work" src="/welcome?sid=[REDACTED]"></frameset></frameset></html>
+
+<!-- frame path=['hdr'] url=http://127.0.0.1:8765/hdr?sid=[REDACTED] -->
+<html><head><title>CoreLink</title><style>
+body{font-family:Verdana,Arial,sans-serif;font-size:11px;margin:4px;background:#f4f4ee}
+td{font-size:11px} .lbl{font-weight:bold;text-align:right;padding-right:6px;color:#333}
+.hdrcell{background:#003366;color:#fff;font-weight:bold;padding:3px}
+.err{color:#c00;font-weight:bold} .grid td{border-bottom:1px solid #ccc;padding:2px 8px}
+.btn{font-size:11px;border:2px outset #ccc;background:#ddd}
+</style></head><body><table width="100%"><tbody><tr><td class="hdrcell">CoreLink Teller 4.2 — Demo Federal Credit Union</td><td class="hdrcell" align="right"><a style="color:#fff" href="/signoff?sid=[REDACTED]" target="_top">Sign Off</a></td></tr></tbody></table></body></html>
+
+<!-- frame path=['nav'] url=http://127.0.0.1:8765/nav?sid=[REDACTED] -->
+<html><head><title>CoreLink</title><style>
+body{font-family:Verdana,Arial,sans-serif;font-size:11px;margin:4px;background:#f4f4ee}
+td{font-size:11px} .lbl{font-weight:bold;text-align:right;padding-right:6px;color:#333}
+.hdrcell{background:#003366;color:#fff;font-weight:bold;padding:3px}
+.err{color:#c00;font-weight:bold} .grid td{border-bottom:1px solid #ccc;padding:2px 8px}
+.btn{font-size:11px;border:2px outset #ccc;background:#ddd}
+</style></head><body><table cellpadding="4"><tbody><tr><td>» <a href="/mbrinq?sid=[REDACTED]" target="work" data-cua-hit="be7a734ef2">Member Inquiry</a></td></tr><tr><td>» <a href="/welcome?sid=[REDACTED]&amp;fn=drawer" target="work">Teller Drawer</a></td></tr><tr><td>» <a href="/welcome?sid=[REDACTED]&amp;fn=gl" target="work">GL Inquiry</a></td></tr><tr><td>» <a href="/admin/users?sid=[REDACTED]" target="work">System Admin</a></td></tr></tbody></table></body></html>
+
+<!-- frame path=['work'] url=http://127.0.0.1:8765/mbrinq -->
+<html><head><title>CoreLink</title><style>
+body{font-family:Verdana,Arial,sans-serif;font-size:11px;margin:4px;background:#f4f4ee}
+td{font-size:11px} .lbl{font-weight:bold;text-align:right;padding-right:6px;color:#333}
+.hdrcell{background:#003366;color:#fff;font-weight:bold;padding:3px}
+.err{color:#c00;font-weight:bold} .grid td{border-bottom:1px solid #ccc;padding:2px 8px}
+.btn{font-size:11px;border:2px outset #ccc;background:#ddd}
+</style></head><body><form method="post" action="/mbrinq"><input type="hidden" name="sid" value="[REDACTED]" style=""><table width="100%" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td><table width="100%" cellpadding="2" cellspacing="0"><tbody><tr><td class="hdrcell">MEMBER INQUIRY</td></tr><tr><td><table cellpadding="3" cellspacing="0" border="0"><tbody><tr><td colspan="2" class="err">E403 ACCESS DENIED - RESTRICTED ACCOUNT. SUPERVISOR OVERRIDE REQUIRED</td></tr><tr><td class="lbl">Member #</td><td><input type="text" name="F0231" size="8" maxlength="10" value="[REDACTED]" data-cua-sensitive="1" style=""></td><td class="lbl">Suffix</td><td><input type="text" name="F0232" size="4" value="0000" style=""></td></tr><tr><td></td><td colspan="3"><input type="submit" class="btn" name="B01" value="Go" style="">&nbsp;<input type="reset" class="btn" value="Clear" style=""></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></form></body></html>

@@ -1,0 +1,122 @@
+{
+  "id": "iv1",
+  "run_id": "replay-20261009-134132-e2e5",
+  "kind": "failure",
+  "subject": "corelink.member.read_savings_balance@1.0.0",
+  "step_id": "s3",
+  "step_intent": "Proceed to look up the member after entering the Member # as a trained operator would by clicking 'Go'.",
+  "code": "APP_ERROR",
+  "reason": "Unhandled host exception page",
+  "screenshot": "screens/011-escalation-app_error.png",
+  "frames": [
+    {
+      "frame": "top",
+      "url": "http://127.0.0.1:8765/main?sid=[REDACTED]"
+    },
+    {
+      "frame": "hdr",
+      "url": "http://127.0.0.1:8765/hdr?sid=[REDACTED]"
+    },
+    {
+      "frame": "nav",
+      "url": "http://127.0.0.1:8765/nav?sid=[REDACTED]"
+    },
+    {
+      "frame": "work",
+      "url": "http://127.0.0.1:8765/mbrinq"
+    }
+  ],
+  "allowed_resolutions": [
+    "retry_step",
+    "skip_step",
+    "completed",
+    "abort"
+  ],
+  "status": "resolved",
+  "created_at": "2026-10-09T17:41:33.388+00:00",
+  "operator": "op.alice",
+  "claimed_at": "2026-10-09T17:41:33.439+00:00",
+  "resolved_at": "2026-10-09T17:41:34.115+00:00",
+  "resolution": "skip_step",
+  "note": "host crashed on submit; re-ran the inquiry by hand",
+  "human_actions": [
+    {
+      "type": "click",
+      "element": {
+        "tag": "a",
+        "role": "link",
+        "name": "Member Inquiry",
+        "label": "\u00bb",
+        "input_type": null,
+        "attrs": {
+          "href": "/mbrinq",
+          "target": "work"
+        },
+        "enabled": true
+      },
+      "url": "http://127.0.0.1:8765/nav",
+      "frame": [
+        "nav"
+      ]
+    },
+    {
+      "type": "change",
+      "element": {
+        "tag": "input",
+        "role": "textbox",
+        "name": "",
+        "label": "Member #",
+        "input_type": "text",
+        "attrs": {
+          "name": "F0231",
+          "form_action": "/mbrinq"
+        },
+        "enabled": true,
+        "value": "{member_id}"
+      },
+      "url": "http://127.0.0.1:8765/mbrinq",
+      "frame": [
+        "work"
+      ]
+    },
+    {
+      "type": "change",
+      "element": {
+        "tag": "input",
+        "role": "textbox",
+        "name": "",
+        "label": "Member #",
+        "input_type": "text",
+        "attrs": {
+          "name": "F0231",
+          "form_action": "/mbrinq"
+        },
+        "enabled": true,
+        "value": "{member_id}"
+      },
+      "url": "http://127.0.0.1:8765/mbrinq",
+      "frame": [
+        "work"
+      ]
+    },
+    {
+      "type": "click",
+      "element": {
+        "tag": "input",
+        "role": "button",
+        "name": "Go",
+        "label": "",
+        "input_type": "submit",
+        "attrs": {
+          "name": "B01",
+          "form_action": "/mbrinq"
+        },
+        "enabled": true
+      },
+      "url": "http://127.0.0.1:8765/mbrinq",
+      "frame": [
+        "work"
+      ]
+    }
+  ]
+}

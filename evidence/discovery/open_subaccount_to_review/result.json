@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "Reached the confirmation screen for opening a new sub-account with the specified member, share type, nickname, and initial deposit. Stopped before confirming as instructed.",
+  "steps_taken": 9,
+  "stop_code": null,
+  "capability": "corelink.member.open_subaccount_to_review@1.0.0",
+  "usage": {
+    "prompt_tokens": 12708,
+    "completion_tokens": 407,
+    "calls": 9
+  }
+}

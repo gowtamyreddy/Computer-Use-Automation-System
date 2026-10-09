@@ -1,0 +1,12 @@
+{"seq": 1, "ts": "2026-10-09T17:41:06.631+00:00", "t_ms": 244, "type": "replay_start", "capability": "corelink.member.read_savings_balance", "version": "1.0.0", "status": "draft", "tenant": "demo", "inputs": ["member_id"]}
+{"seq": 2, "ts": "2026-10-09T17:41:06.632+00:00", "t_ms": 244, "type": "login_start", "profile": "corelink-teller", "tenant": "demo"}
+{"seq": 3, "ts": "2026-10-09T17:41:06.672+00:00", "t_ms": 284, "type": "step_ok", "step_id": "s1", "action": "fill", "strategy": "label", "intent": "Enter user id"}
+{"seq": 4, "ts": "2026-10-09T17:41:06.706+00:00", "t_ms": 318, "type": "step_ok", "step_id": "s2", "action": "fill", "strategy": "label", "intent": "Enter password"}
+{"seq": 5, "ts": "2026-10-09T17:41:06.748+00:00", "t_ms": 360, "type": "step_ok", "step_id": "s3", "action": "click", "strategy": "role_name", "intent": "Sign on"}
+{"seq": 6, "ts": "2026-10-09T17:41:06.766+00:00", "t_ms": 378, "type": "login_ok", "home": "http://127.0.0.1:8765/main?sid=[REDACTED]"}
+{"seq": 7, "ts": "2026-10-09T17:41:06.815+00:00", "t_ms": 428, "type": "step_ok", "step_id": "s1", "action": "click", "strategy": "role_name", "intent": "Start a member lookup by selecting 'Member Inquiry' from the navigation menu."}
+{"seq": 8, "ts": "2026-10-09T17:41:06.830+00:00", "t_ms": 443, "type": "step_ok", "step_id": "s2", "action": "fill", "strategy": "label", "intent": "Enter the member number to look up the member for inquiry."}
+{"seq": 9, "ts": "2026-10-09T17:41:06.868+00:00", "t_ms": 480, "type": "step_ok", "step_id": "s3", "action": "click", "strategy": "role_name", "intent": "Proceed to look up the member after entering the Member # as a trained operator would by clicking 'Go'."}
+{"seq": 10, "ts": "2026-10-09T17:41:07.027+00:00", "t_ms": 639, "type": "state_detected", "rule": "record_not_found", "code": "RECORD_NOT_FOUND", "classification": "business_outcome", "step_id": "s3"}
+{"seq": 11, "ts": "2026-10-09T17:41:07.072+00:00", "t_ms": 684, "type": "business_outcome", "code": "RECORD_NOT_FOUND", "step_id": "s3", "evidence": ["screens/010-record_not_found.png", "dom/010-record_not_found.html"]}
+{"seq": 12, "ts": "2026-10-09T17:41:07.072+00:00", "t_ms": 684, "type": "replay_finished", "status": "business_outcome", "code": "RECORD_NOT_FOUND"}

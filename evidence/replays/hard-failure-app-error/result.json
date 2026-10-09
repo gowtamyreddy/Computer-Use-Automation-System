@@ -1,0 +1,62 @@
+{
+  "run_id": "replay-20261009-134126-1c0e",
+  "capability": "corelink.member.read_savings_balance",
+  "version": "1.0.0",
+  "tenant": "demo",
+  "status": "failed",
+  "outputs": {},
+  "outcome": null,
+  "error": {
+    "code": "APP_ERROR",
+    "message": "Unhandled host exception page",
+    "step_id": "s3",
+    "step_intent": "Proceed to look up the member after entering the Member # as a trained operator would by clicking 'Go'.",
+    "expected": [],
+    "observed": {
+      "frames": [
+        {
+          "frame": "top",
+          "url": "http://127.0.0.1:8765/main?sid=[REDACTED]"
+        },
+        {
+          "frame": "hdr",
+          "url": "http://127.0.0.1:8765/hdr?sid=[REDACTED]"
+        },
+        {
+          "frame": "nav",
+          "url": "http://127.0.0.1:8765/nav?sid=[REDACTED]"
+        },
+        {
+          "frame": "work",
+          "url": "http://127.0.0.1:8765/mbrinq"
+        }
+      ],
+      "screen": "== frame f0 [top] path=/main title=\"CoreLink Teller\"\n  (no visible content)\n== frame f1 [hdr] path=/hdr title=\"CoreLink\"\n  [f1:0] cell \"CoreLink Teller 4.2 \\u2014 Demo Federal Credit Union\"\n  [f1:1] link \"Sign Off\" label=\"CoreLink Teller 4.2 \\u2014 Demo Federal Credit Union\" -> /signoff\n== frame f2 [nav] path=/nav title=\"CoreLink\"\n  [f2:0] cell \"\\u00bb Member Inquiry\"\n  [f2:1] link \"Member Inquiry\" label=\"\\u00bb\" -> /mbrinq\n  [f2:2] cell \"\\u00bb Teller Drawer\"\n  [f2:3] link \"Teller Drawer\" label=\"\\u00bb\" -> /welcome\n  [f2:4] cell \"\\u00bb GL Inquiry\"\n  [f2:5] link \"GL Inquiry\" label=\"\\u00bb\" -> /welcome\n  [f2:6] cell \"\\u00bb System Admin\"\n  [f2:7] link \"System Admin\" label=\"\\u00bb\" -> /admin/users\n== frame f3 [work] path=/mbrinq title=\"CoreLink\"\n  [f3:0] heading \"CL-500 UNHANDLED EXCEPTION\"\n  [f3:1] text \"MBRINQ.CBL line 4410: SQLCODE -911\""
+    },
+    "evidence": [
+      "screens/010-app_error.png",
+      "dom/010-app_error.html"
+    ],
+    "retryable": false
+  },
+  "recoveries": [],
+  "warnings": [],
+  "interventions": [],
+  "steps": [
+    {
+      "step_id": "s1",
+      "action": "click",
+      "status": "ok",
+      "strategy": "role_name",
+      "duration_ms": 52
+    },
+    {
+      "step_id": "s2",
+      "action": "fill",
+      "status": "ok",
+      "strategy": "label",
+      "duration_ms": 10
+    }
+  ],
+  "duration_ms": 455
+}

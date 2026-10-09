@@ -1,0 +1,24 @@
+{
+  "run_id": "replay-20261009-134127-3b2f",
+  "capability": "corelink.member.read_savings_balance",
+  "version": "1.0.0",
+  "tenant": "demo",
+  "status": "rejected",
+  "outputs": {},
+  "outcome": null,
+  "error": {
+    "code": "INVALID_INPUT",
+    "message": "missing required input 'member_id'",
+    "step_id": null,
+    "step_intent": null,
+    "expected": [],
+    "observed": {},
+    "evidence": [],
+    "retryable": false
+  },
+  "recoveries": [],
+  "warnings": [],
+  "interventions": [],
+  "steps": [],
+  "duration_ms": 0
+}

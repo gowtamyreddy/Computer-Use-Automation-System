@@ -1,0 +1,68 @@
+{
+  "run_id": "replay-20261009-134112-0467",
+  "capability": "corelink.member.read_savings_balance",
+  "version": "1.0.0",
+  "tenant": "demo",
+  "status": "succeeded",
+  "outputs": {
+    "share_savings_balance": "sha256:8f5418c8af2e"
+  },
+  "outcome": null,
+  "error": null,
+  "recoveries": [
+    {
+      "code": "TRANSIENT_BUSY",
+      "rule": "system_busy",
+      "action": "retry_flow",
+      "step_id": "s3",
+      "attempt": 1
+    }
+  ],
+  "warnings": [],
+  "interventions": [],
+  "steps": [
+    {
+      "step_id": "s1",
+      "action": "click",
+      "status": "ok",
+      "strategy": "role_name",
+      "duration_ms": 67
+    },
+    {
+      "step_id": "s2",
+      "action": "fill",
+      "status": "ok",
+      "strategy": "label",
+      "duration_ms": 12
+    },
+    {
+      "step_id": "s1",
+      "action": "click",
+      "status": "ok",
+      "strategy": "role_name",
+      "duration_ms": 57
+    },
+    {
+      "step_id": "s2",
+      "action": "fill",
+      "status": "ok",
+      "strategy": "label",
+      "duration_ms": 222
+    },
+    {
+      "step_id": "s3",
+      "action": "click",
+      "status": "ok",
+      "strategy": "role_name",
+      "duration_ms": 188
+    },
+    {
+      "step_id": "s4",
+      "action": "extract",
+      "status": "ok",
+      "strategy": "table_cell",
+      "duration_ms": 14
+    }
+  ],
+  "duration_ms": 2108
+}

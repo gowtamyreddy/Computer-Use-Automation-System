@@ -1,0 +1,16 @@
+{"seq": 1, "ts": "2026-10-09T17:41:03.363+00:00", "t_ms": 324, "type": "replay_start", "capability": "corelink.member.open_subaccount_to_review", "version": "1.0.0", "status": "draft", "tenant": "demo", "inputs": ["deposit", "member_id", "nickname", "share_type"]}
+{"seq": 2, "ts": "2026-10-09T17:41:03.363+00:00", "t_ms": 324, "type": "login_start", "profile": "corelink-teller", "tenant": "demo"}
+{"seq": 3, "ts": "2026-10-09T17:41:03.405+00:00", "t_ms": 367, "type": "step_ok", "step_id": "s1", "action": "fill", "strategy": "label", "intent": "Enter user id"}
+{"seq": 4, "ts": "2026-10-09T17:41:03.442+00:00", "t_ms": 404, "type": "step_ok", "step_id": "s2", "action": "fill", "strategy": "label", "intent": "Enter password"}
+{"seq": 5, "ts": "2026-10-09T17:41:03.497+00:00", "t_ms": 459, "type": "step_ok", "step_id": "s3", "action": "click", "strategy": "role_name", "intent": "Sign on"}
+{"seq": 6, "ts": "2026-10-09T17:41:03.520+00:00", "t_ms": 482, "type": "login_ok", "home": "http://127.0.0.1:8765/main?sid=[REDACTED]"}
+{"seq": 7, "ts": "2026-10-09T17:41:03.582+00:00", "t_ms": 544, "type": "step_ok", "step_id": "s1", "action": "click", "strategy": "role_name", "intent": "Start by accessing Member Inquiry to look up the member and open a new share sub-account."}
+{"seq": 8, "ts": "2026-10-09T17:41:03.599+00:00", "t_ms": 561, "type": "step_ok", "step_id": "s2", "action": "fill", "strategy": "label", "intent": "Enter the member number to look up the member for whom the new share sub-account will be opened."}
+{"seq": 9, "ts": "2026-10-09T17:41:03.635+00:00", "t_ms": 597, "type": "step_ok", "step_id": "s3", "action": "click", "strategy": "role_name", "intent": "Proceed to member's account details after entering Member # and Suffix."}
+{"seq": 10, "ts": "2026-10-09T17:41:03.819+00:00", "t_ms": 780, "type": "step_ok", "step_id": "s4", "action": "click", "strategy": "role_name", "intent": "To begin the process of opening a new sub-account for the member."}
+{"seq": 11, "ts": "2026-10-09T17:41:04.010+00:00", "t_ms": 971, "type": "step_ok", "step_id": "s5", "action": "select", "strategy": "label", "intent": "Select the share product to open as specified by the task parameter."}
+{"seq": 12, "ts": "2026-10-09T17:41:04.018+00:00", "t_ms": 980, "type": "step_ok", "step_id": "s6", "action": "fill", "strategy": "label", "intent": "Enter the nickname for the new share sub-account as required by the task."}
+{"seq": 13, "ts": "2026-10-09T17:41:04.024+00:00", "t_ms": 986, "type": "step_ok", "step_id": "s7", "action": "fill", "strategy": "label", "intent": "Enter the initial deposit amount for the new sub-account as required by the workflow."}
+{"seq": 14, "ts": "2026-10-09T17:41:04.053+00:00", "t_ms": 1014, "type": "step_ok", "step_id": "s8", "action": "click", "strategy": "role_name", "intent": "Proceed to the review/confirmation screen after entering all required information for opening the sub-account."}
+{"seq": 15, "ts": "2026-10-09T17:41:04.222+00:00", "t_ms": 1183, "type": "checkpoint_ok", "conditions": ["frame work at /subacct/review", "element present: cell 'CONFIRM NEW SUB-ACCOUNT'", "element present: cell labelled 'Member #'", "element present: cell labelled 'Share Type'"]}
+{"seq": 16, "ts": "2026-10-09T17:41:04.265+00:00", "t_ms": 1226, "type": "replay_finished", "status": "succeeded", "code": null}

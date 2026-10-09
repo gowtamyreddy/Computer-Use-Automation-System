@@ -1,0 +1,192 @@
+schema_version: '1.0'
+id: corelink.member.read_savings_balance
+version: 1.0.0
+title: read_share_savings_balance
+description: Look up a member by member_id and read their current Share Savings balance.
+status: draft
+app:
+  product: corelink-teller
+  versions: '>=4.2 <5'
+  surface: legacy_web
+  profile: corelink-teller
+provenance:
+  recorded_at: '2026-10-09T17:40:46+00:00'
+  discovery_run_id: discovery-20261009-134038-1bce
+  model: gpt-4.1
+  goal: Look up member {member_id} and read their current Share Savings balance
+  recorded_on_tenant: demo
+  human_interventions: 0
+inputs:
+- name: member_id
+  type: string
+  description: 5-digit member number
+  required: true
+  sensitivity: pii
+outputs:
+- name: share_savings_balance
+  type: money
+  description: Current balance of the member's Share Savings account
+  sensitivity: confidential
+outcomes: []
+steps:
+- id: s1
+  action: click
+  intent: Start a member lookup by selecting 'Member Inquiry' from the navigation menu.
+  risk: safe
+  target:
+    description: link 'Member Inquiry'
+    frame:
+      path:
+      - nav
+    strategies:
+    - kind: role_name
+      role: link
+      name: Member Inquiry
+    - kind: css
+      selector: a[href^="/mbrinq"]
+    fingerprint:
+      tag: a
+      role: link
+  expect:
+  - kind: url_matches
+    frame:
+      path:
+      - work
+    path: /mbrinq
+    query: {}
+  timeout_ms: 10000
+- id: s2
+  action: fill
+  intent: Enter the member number to look up the member for inquiry.
+  risk: safe
+  target:
+    description: 'textbox labelled ''Member #'''
+    frame:
+      path:
+      - work
+    strategies:
+    - kind: label
+      label: 'Member #'
+      role: textbox
+    - kind: css
+      selector: input[name="F0231"]
+    fingerprint:
+      tag: input
+      input_type: text
+      role: textbox
+  value:
+    kind: param
+    param: member_id
+  expect: []
+  timeout_ms: 10000
+- id: s3
+  action: click
+  intent: 'Proceed to look up the member after entering the Member # as a trained operator would by clicking ''Go''.'
+  risk: safe
+  target:
+    description: button 'Go'
+    frame:
+      path:
+      - work
+    strategies:
+    - kind: role_name
+      role: button
+      name: Go
+    - kind: css
+      selector: input[name="B01"]
+    fingerprint:
+      tag: input
+      input_type: submit
+      role: button
+  expect:
+  - kind: url_matches
+    frame:
+      path:
+      - work
+    path: /mbrdtl
+    query:
+      mbr: '{member_id}'
+  timeout_ms: 10000
+- id: s4
+  action: extract
+  intent: This cell is in the 'Balance' column and the 'Share Savings' row, matching the account type requested.
+  risk: read
+  target:
+    description: '''Balance'' cell in row ''Share Savings'''
+    frame:
+      path:
+      - work
+    strategies:
+    - kind: table_cell
+      column: Balance
+      row_key: Share Savings
+    - kind: label
+      label: Share Savings
+    fingerprint:
+      tag: td
+      role: cell
+  output: share_savings_balance
+  expect: []
+  timeout_ms: 10000
+success:
+- kind: url_matches
+  frame:
+    path:
+    - work
+  path: /mbrdtl
+  query:
+    mbr: '{member_id}'
+- kind: element_present
+  target:
+    description: cell 'MEMBER DETAIL'
+    frame:
+      path:
+      - work
+    strategies:
+    - kind: text
+      text: MEMBER DETAIL
+    fingerprint:
+      tag: td
+      role: cell
+- kind: element_present
+  target:
+    description: cell 'SHARES / ACCOUNTS'
+    frame:
+      path:
+      - work
+    strategies:
+    - kind: text
+      text: SHARES / ACCOUNTS
+    fingerprint:
+      tag: td
+      role: cell
+- kind: element_present
+  target:
+    description: columnheader 'Balance'
+    frame:
+      path:
+      - work
+    strategies:
+    - kind: text
+      text: Balance
+    fingerprint:
+      tag: th
+      role: columnheader
+- kind: element_present
+  target:
+    description: '''Balance'' cell in row ''Share Savings'''
+    frame:
+      path:
+      - work
+    strategies:
+    - kind: table_cell
+      column: Balance
+      row_key: Share Savings
+    - kind: label
+      label: Share Savings
+    fingerprint:
+      tag: td
+      role: cell
+review_notes:
+- 'link ''Member Inquiry'': dropped label locator (attempts=[{''kind'': ''label'', ''matches'': 4, ''fingerprint_ok'': 4,
+  ''accepted'': False}])'

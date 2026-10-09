@@ -1,0 +1,230 @@
+{
+  "system": "You are the discovery agent of a computer-use system that operates legacy back-office banking\napplications for credit-union staff. You see the application as frames containing elements; each element has a\nref like [f3:12]. You act by calling exactly ONE tool per turn.\n\nYour successful run is converted into a deterministic automation that will be replayed many times, so:\n- Take the most direct, conventional path a trained operator would take. Do not explore or click around.\n- Values that come from the task parameters MUST be entered with fill/select using `param` (you are not shown\n  parameter values). Use `text`/`option` only for fixed values that are the same on every run.\n- Read data with `extract`, pointing at the element that contains the value. Values may appear masked\n  (e.g. $[AMOUNT], [REDACTED-PII]) -- that is intentional; locate the right element by its row/column/label.\n  Give each output a snake_case name and a type.\n- You are already signed on. Never sign off and never open administration functions.\n- Controls that commit changes of record (Confirm, Post, Submit payment, ...) require human approval. Only use\n  them if the goal explicitly requires committing. If the goal is to reach a review/confirmation screen, stop there.\n- If the host shows an error that is a legitimate answer (e.g. no record found), call finish with success=false\n  and explain. If you are blocked or unsure how to proceed safely, call request_human.\n- When the goal is achieved (including all extracts), call finish with success=true, naming 1-3 checkpoint_refs:\n  stable elements (e.g. a screen title or field label, not a data value) that prove you are on the final screen.",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "click",
+        "description": "Click a link/button.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string",
+              "description": "element ref, e.g. f3:12"
+            },
+            "reason": {
+              "type": "string",
+              "description": "why, in operator language"
+            }
+          },
+          "required": [
+            "ref",
+            "reason"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "fill",
+        "description": "Type into a text field. Provide exactly one of param or text.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string",
+              "description": "element ref"
+            },
+            "param": {
+              "type": "string",
+              "description": "task parameter name"
+            },
+            "text": {
+              "type": "string",
+              "description": "fixed literal (same on every run)"
+            },
+            "reason": {
+              "type": "string",
+              "description": "why"
+            }
+          },
+          "required": [
+            "ref",
+            "reason"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "select",
+        "description": "Choose an option in a dropdown. Provide exactly one of param or option.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string",
+              "description": "element ref"
+            },
+            "param": {
+              "type": "string",
+              "description": "task parameter name"
+            },
+            "option": {
+              "type": "string",
+              "description": "visible option text"
+            },
+            "reason": {
+              "type": "string",
+              "description": "why"
+            }
+          },
+          "required": [
+            "ref",
+            "reason"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "press",
+        "description": "Press a key (e.g. Enter, Tab) in an element.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string",
+              "description": "element ref"
+            },
+            "key": {
+              "type": "string",
+              "description": "key name"
+            },
+            "reason": {
+              "type": "string",
+              "description": "why"
+            }
+          },
+          "required": [
+            "ref",
+            "key",
+            "reason"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "extract",
+        "description": "Declare an output: read the value of an element.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string",
+              "description": "element containing the value"
+            },
+            "output": {
+              "type": "string",
+              "description": "snake_case output name"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "string",
+                "integer",
+                "decimal",
+                "money"
+              ]
+            },
+            "description": {
+              "type": "string",
+              "description": "what the value means"
+            },
+            "reason": {
+              "type": "string",
+              "description": "why this element"
+            }
+          },
+          "required": [
+            "ref",
+            "output",
+            "type",
+            "description",
+            "reason"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "request_human",
+        "description": "Ask a human operator to take over the live session.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "reason": {
+              "type": "string",
+              "description": "what is blocking you"
+            }
+          },
+          "required": [
+            "reason"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "finish",
+        "description": "End the run.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "success": {
+              "type": "boolean"
+            },
+            "summary": {
+              "type": "string",
+              "description": "what was achieved / why not"
+            },
+            "checkpoint_refs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "1-3 refs proving the final screen"
+            },
+            "capability_title": {
+              "type": "string",
+              "description": "short title for the reusable capability"
+            },
+            "capability_description": {
+              "type": "string",
+              "description": "one-sentence description for a calling agent"
+            }
+          },
+          "required": [
+            "success",
+            "summary"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

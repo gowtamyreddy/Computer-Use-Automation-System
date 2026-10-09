@@ -1,0 +1,17 @@
+{"seq": 1, "ts": "2026-10-09T17:41:09.458+00:00", "t_ms": 266, "type": "replay_start", "capability": "corelink.member.read_savings_balance", "version": "1.0.0", "status": "draft", "tenant": "demo", "inputs": ["member_id"]}
+{"seq": 2, "ts": "2026-10-09T17:41:09.459+00:00", "t_ms": 267, "type": "login_start", "profile": "corelink-teller", "tenant": "demo"}
+{"seq": 3, "ts": "2026-10-09T17:41:09.502+00:00", "t_ms": 310, "type": "step_ok", "step_id": "s1", "action": "fill", "strategy": "label", "intent": "Enter user id"}
+{"seq": 4, "ts": "2026-10-09T17:41:09.542+00:00", "t_ms": 351, "type": "step_ok", "step_id": "s2", "action": "fill", "strategy": "label", "intent": "Enter password"}
+{"seq": 5, "ts": "2026-10-09T17:41:09.596+00:00", "t_ms": 404, "type": "step_ok", "step_id": "s3", "action": "click", "strategy": "role_name", "intent": "Sign on"}
+{"seq": 6, "ts": "2026-10-09T17:41:09.617+00:00", "t_ms": 426, "type": "state_detected", "rule": "system_notice", "code": "INTERSTITIAL_NOTICE", "classification": "recoverable", "step_id": "s3"}
+{"seq": 7, "ts": "2026-10-09T17:41:09.664+00:00", "t_ms": 473, "type": "recovered", "rule": "system_notice", "action": "dismiss", "step_id": "s3"}
+{"seq": 8, "ts": "2026-10-09T17:41:09.666+00:00", "t_ms": 475, "type": "state_detected", "rule": "system_notice", "code": "INTERSTITIAL_NOTICE", "classification": "recoverable", "step_id": "s3"}
+{"seq": 9, "ts": "2026-10-09T17:41:11.669+00:00", "t_ms": 2477, "type": "dismiss_retry", "rule": "system_notice", "step_id": "s3"}
+{"seq": 10, "ts": "2026-10-09T17:41:11.685+00:00", "t_ms": 2494, "type": "login_ok", "home": "http://127.0.0.1:8765/main?sid=[REDACTED]"}
+{"seq": 11, "ts": "2026-10-09T17:41:11.719+00:00", "t_ms": 2528, "type": "step_ok", "step_id": "s1", "action": "click", "strategy": "role_name", "intent": "Start a member lookup by selecting 'Member Inquiry' from the navigation menu."}
+{"seq": 12, "ts": "2026-10-09T17:41:11.905+00:00", "t_ms": 2713, "type": "step_ok", "step_id": "s2", "action": "fill", "strategy": "label", "intent": "Enter the member number to look up the member for inquiry."}
+{"seq": 13, "ts": "2026-10-09T17:41:11.936+00:00", "t_ms": 2744, "type": "step_ok", "step_id": "s3", "action": "click", "strategy": "role_name", "intent": "Proceed to look up the member after entering the Member # as a trained operator would by clicking 'Go'."}
+{"seq": 14, "ts": "2026-10-09T17:41:12.125+00:00", "t_ms": 2933, "type": "extracted", "step_id": "s4", "output": "share_savings_balance", "value_fingerprint": "sha256:8f5418c8af2e"}
+{"seq": 15, "ts": "2026-10-09T17:41:12.125+00:00", "t_ms": 2933, "type": "step_ok", "step_id": "s4", "action": "extract", "strategy": "table_cell", "intent": "This cell is in the 'Balance' column and the 'Share Savings' row, matching the account type requested."}
+{"seq": 16, "ts": "2026-10-09T17:41:12.134+00:00", "t_ms": 2942, "type": "checkpoint_ok", "conditions": ["frame work at /mbrdtl mbr={member_id}", "element present: cell 'MEMBER DETAIL'", "element present: cell 'SHARES / ACCOUNTS'", "element present: columnheader 'Balance'", "element present: 'Balance' cell in row 'Share Savings'"]}
+{"seq": 17, "ts": "2026-10-09T17:41:12.162+00:00", "t_ms": 2970, "type": "replay_finished", "status": "succeeded", "code": null}
